@@ -13,7 +13,7 @@ namespace PruebaExamen.Models
         public DateTime FechaCompra { get; set; }
         [Column("IDPELICULA")]
         public int IdPelicula { get; set; }
-        [Column("USUARIOID")]
+        [Column("IDUSUARIO")]
         public int IdUsuario { get; set; }
         [Column("CANTIDAD")]
         public int Cantidad { get; set; }

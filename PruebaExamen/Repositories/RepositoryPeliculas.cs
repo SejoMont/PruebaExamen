@@ -58,6 +58,7 @@ namespace PruebaExamen.Repositories
         public async Task ComprarProducto(Compra compra)
         {
             context.Compras.Add(compra);
+            await context.SaveChangesAsync();
         }
     }
 }

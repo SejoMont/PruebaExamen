@@ -99,12 +99,13 @@ namespace PruebaExamen.Controllers
         [HttpPost]
         public async Task<IActionResult> Compra(List<int> peliculas, List<int> cantidades, int iduser)
         {
+            int idcompra = await repo.GetUltimaCompra();
             for (int i = 0; i < peliculas.Count; i++)
             {
                 int peli = peliculas[i];
                 int cantidad = cantidades[i];
-
-                int idcompra = await repo.GetUltimaCompra();
+                
+                idcompra++;
                 Compra nuevaCompra = new Compra()
                 {
                     IdCompra = idcompra,
@@ -113,9 +114,11 @@ namespace PruebaExamen.Controllers
                     IdUsuario = iduser,
                     Cantidad = cantidad // Asigna la cantidad correcta
                 };
-
+                
                 await repo.ComprarProducto(nuevaCompra);
+                
             }
+            HttpContext.Session.Remove("CARRITO");
             return RedirectToAction("Index");
         }
     }
