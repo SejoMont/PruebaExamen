@@ -41,7 +41,7 @@ namespace PruebaExamen.Controllers
         public IActionResult GuardarPeliculaCarrito(int idPelicula, int? idGenero)
         {
             if (idPelicula != null)
-            //GUARDAMOS EL PRODUCTO EN EL CARRITO
+            //Guardamos el producto en el carrito
             {
                 List<int> carrito;
                 if (HttpContext.Session.GetObject<List<int>>("CARRITO") == null)
@@ -68,9 +68,9 @@ namespace PruebaExamen.Controllers
 
         public IActionResult Carrito(int? idPeliculaEliminar)
         {
-            //LE PASAMOS EL CARRITO
+            //Le pasamos el carrito
             List<int> carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
-            //TIENES QUE CREAR PARA AÑADIR DATOS AL CARRITO
+            //Tienes que crear para añadir datos al carrito
             if (carrito == null)
             {
                 return View();
@@ -96,6 +96,14 @@ namespace PruebaExamen.Controllers
             return View(peliculas);
         }
 
+        [AuthorizeUsuarios]
+        public IActionResult ComprasUsuario(int iduser)
+        {
+            List<Compra> compras = this.repo.GetComprasUsuario(iduser);
+
+            return View(compras);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Compra(List<int> peliculas, List<int> cantidades, int iduser)
         {
@@ -112,14 +120,14 @@ namespace PruebaExamen.Controllers
                     IdPelicula = peli,
                     FechaCompra = DateTime.Now,
                     IdUsuario = iduser,
-                    Cantidad = cantidad // Asigna la cantidad correcta
+                    Cantidad = cantidad 
                 };
                 
                 await repo.ComprarProducto(nuevaCompra);
                 
             }
             HttpContext.Session.Remove("CARRITO");
-            return RedirectToAction("Index");
+            return RedirectToAction("ComprasUsuario", "Peliculas", new {iduser = iduser});
         }
     }
 }

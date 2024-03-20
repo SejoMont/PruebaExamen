@@ -25,26 +25,22 @@ namespace PruebaExamen.Repositories
 
         public async Task<List<Pelicula>> PeliculasGeneroAsync(int idgenero)
         {
-            var consulta = from datos in context.Peliculas
-                           where datos.IdGenero == idgenero
-                           select datos;
-            return await consulta.ToListAsync();
+            return await this.context.Peliculas.Where(p => p.IdGenero == idgenero).ToListAsync();
         }
 
         public async Task<List<Genero>> GetAllGenerosAsync()
         {
-            var consulta = from datos in context.Generos
-                           select datos;
-            return await consulta.ToListAsync();
+            return await this.context.Generos.ToListAsync();
         }
 
         public List<Pelicula> GetPeliculasCarrito(List<int> idPelicula)
         {
+            return context.Peliculas.Where(p => idPelicula.Contains(p.IdPelicula)).ToList();
+        }
 
-            var consulta = from datos in context.Peliculas
-                           where idPelicula.Contains(datos.IdPelicula)
-                           select datos;
-            return consulta.ToList();
+        public List<Compra> GetComprasUsuario(int userid)
+        {
+            return context.Compras.Where(c => c.IdUsuario == userid).ToList();
         }
 
         public async Task<int> GetUltimaCompra()

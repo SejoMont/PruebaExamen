@@ -13,7 +13,7 @@
             <th>ID Pelicula</th>
             <th>Nombre</th>
             <th>Sinopsis</th>
-
+            <th>Imagen</th>
             <th></th>
         </tr>
     </thead>
@@ -31,6 +31,9 @@
                     @item.Sinopsis)
                 </td>
                 <td>
+                    <img src="@HelperPathProvider.MapUrlPath(@item.Imagen, Folders.Peliculas)" width="100px" />
+                </td>
+                <td>
                     <a asp-controller="Peliculas"
                        asp-action="DetallesPelicula"
                        asp-route-id="@item.IdPelicula"
@@ -40,7 +43,7 @@
                     @if (carrito != null && carrito.Contains(item.IdPelicula))
                     {
                         <button class="btn  btn-outline-success">
-                            🛒
+                            ✅
                         </button>
                     }
                     else
@@ -49,8 +52,8 @@
                            asp-action="GuardarPeliculaCarrito"
                            asp-route-idPelicula="@item.IdPelicula"
                            asp-route-idGenero="@item.IdGenero"
-                           class="btn btn-info">
-                            Carrito
+                           class="btn btn-outline-info">
+                            🛒
                         </a>
                     }
 

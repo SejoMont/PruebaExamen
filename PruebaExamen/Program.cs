@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using PruebaExamen.Data;
+using PruebaExamen.Helpers;
 using PruebaExamen.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,8 @@ builder.Services.AddAuthentication(options =>
 // Add services to the container.
 string connectionString =
     builder.Configuration.GetConnectionString("SqlPelis");
+
+builder.Services.AddTransient<HelperPathProvider>();
 
 builder.Services.AddTransient<RepositoryUsuarios>();
 builder.Services.AddTransient<RepositoryPeliculas>();
@@ -61,7 +64,7 @@ app.UseMvc(routes =>
 {
     routes.MapRoute(
         name: "default",
-        template: "{controller=Home}/{action=Index}/{id?}");
+        template: "{controller=Peliculas}/{action=Index}/{id?}");
 });
 
 app.Run();

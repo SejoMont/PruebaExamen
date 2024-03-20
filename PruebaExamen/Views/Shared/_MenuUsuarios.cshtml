@@ -3,8 +3,8 @@
     //EFECTO OPTICO DEL LOGIN
     <li class="nav-item">
         <a asp-controller="Peliculas"
-            asp-action="PerfilUsuario"
-            class="nav-link">
+           asp-action="PerfilUsuario"
+           class="nav-link">
             Log In
         </a>
     </li>
@@ -13,8 +13,8 @@ else
 {
     <li class="nav-item">
         <a asp-controller="Managed"
-            asp-action="Logout"
-            class="nav-link">
+           asp-action="Logout"
+           class="nav-link">
             Log out <span style="color:blue">
                 @Context.User.Identity.Name
             </span>
@@ -32,6 +32,14 @@ else
            asp-controller="Peliculas"
            asp-action="Carrito">
             Carrito
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link"
+           asp-controller="Peliculas"
+           asp-action="ComprasUsuario"
+           asp-route-iduser=@Context.User.FindFirst("id").Value>
+            Compras
         </a>
     </li>
 }
