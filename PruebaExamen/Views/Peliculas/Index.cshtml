@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    List<int> carrito = Context.Session.GetObject<List<int>>("CARRITO");
 }
 
 <h1>Seguridad Empleados</h1>
@@ -36,14 +37,26 @@
                        class="btn btn-info">
                         Details
                     </a>
-                    <a asp-controller="Peliculas"
-                       asp-action="DetallesPelicula"
-                       asp-route-id="@item.IdPelicula"
-                       class="btn btn-success">
-                        Details ID
-                    </a>
-                </td>
+                    @if (carrito != null && carrito.Contains(item.IdPelicula))
+                    {
+                        <button class="btn  btn-outline-success">
+                            🛒
+                        </button>
+                    }
+                    else
+                    {
+                        <a asp-controller="Peliculas"
+                           asp-action="GuardarPeliculaCarrito"
+                           asp-route-idPelicula="@item.IdPelicula"
+                           class="btn btn-info">
+                            Carrito
+                        </a>
+                    }
+                    
             </tr>
         }
     </tbody>
 </table>
+
+
+ 

@@ -18,4 +18,5 @@ namespace PruebaExamen.Models
         [Column("CANTIDAD")]
         public int Cantidad { get; set; }
     }
+
 }

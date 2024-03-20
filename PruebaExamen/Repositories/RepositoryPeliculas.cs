@@ -38,5 +38,26 @@ namespace PruebaExamen.Repositories
             return await consulta.ToListAsync();
         }
 
+        public List<Pelicula> GetPeliculasCarrito(List<int> idPelicula)
+        {
+
+            var consulta = from datos in context.Peliculas
+                           where idPelicula.Contains(datos.IdPelicula)
+                           select datos;
+            return consulta.ToList();
+        }
+
+        public async Task<int> GetUltimaCompra()
+        {
+            var ultimoIdImagen = await this.context.Compras
+                                            .MaxAsync(imagen => (int?)imagen.IdCompra);
+
+            return ultimoIdImagen ?? 1;
+        }
+
+        public async Task ComprarProducto(Compra compra)
+        {
+            context.Compras.Add(compra);
+        }
     }
 }
