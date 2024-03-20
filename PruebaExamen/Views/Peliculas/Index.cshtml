@@ -1,0 +1,49 @@
+﻿@model List<Pelicula>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Seguridad Empleados</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID Pelicula</th>
+            <th>Nombre</th>
+            <th>Sinopsis</th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.IdPelicula)
+                </td>
+                <td>
+                    @item.Nombre)
+                </td>
+                <td>
+                    @item.Sinopsis)
+                </td>
+                <td>
+                    <a asp-controller="Peliculas"
+                       asp-action="DetallesPelicula"
+                       asp-route-id="@item.IdPelicula"
+                       class="btn btn-info">
+                        Details
+                    </a>
+                    <a asp-controller="Peliculas"
+                       asp-action="DetallesPelicula"
+                       asp-route-id="@item.IdPelicula"
+                       class="btn btn-success">
+                        Details ID
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

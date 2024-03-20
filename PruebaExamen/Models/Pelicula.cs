@@ -8,7 +8,7 @@ namespace PruebaExamen.Models
     {
         [Key]
         [Column("IdPelicula")]
-        public int IdLibro { get; set; }
+        public int IdPelicula { get; set; }
         [Column("Nombre")]
         public string Nombre { get; set; }
         [Column("Director")]

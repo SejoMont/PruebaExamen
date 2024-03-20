@@ -1,0 +1,21 @@
+﻿﻿@using System.Security.Claims
+
+<h1>
+    Correo: @Context.User.Identity.Name
+</h1>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        Email: @Context.User.FindFirst("Email").Value
+    </li>
+    <li class="list-group-item">
+        Id: @Context.User.FindFirst("id").Value
+    </li>
+</ul>
+<h2>Todos los Claims</h2>
+<ul>
+    @foreach (Claim claim in Context.User.Claims)
+    {
+        <li>@claim.Type: <b>@claim.Value</b></li>
+    }
+</ul>
